@@ -73,7 +73,7 @@ namespace Roulette
             Processor.NumberResult(num);
 
             // Odd/Even
-            EvenOrOdd(num);
+            Processor.OddOrEven(num);
 
             // Excludes 0 and 00 for the results
             if (num != 0 && num != 37)
@@ -82,26 +82,13 @@ namespace Roulette
                 Processor.ColorResult(num, ref black);
 
                 // High/Low
-                if (num <= 18)
-                { Console.WriteLine("High/Low: LOW"); }
-                else
-                { Console.WriteLine("High/Low: HIGH"); }
+                Processor.LowHigh(num);
 
                 // Dozen
-                if (num <= 12)
-                { Console.WriteLine("Dozen : 1ST DOZEN"); }
-                else if (num <= 24)
-                { Console.WriteLine("Dozen : 2ND DOZEN"); }
-                else
-                { Console.WriteLine("Dozen : 3RD DOZEN"); }
+                Processor.Dozen(num);
 
                 // Column
-                if (num % 3 == 1)
-                { Console.WriteLine("Column : 1ST COLUMN"); }
-                else if (num % 3 == 2)
-                { Console.WriteLine("Column : 2ND COLUMN"); }
-                else
-                { Console.WriteLine("Column : 3RD COLUMN"); }
+                Processor.Column(num);
 
                 // Street
                 int street = (num - 1) / 3 + 1;
@@ -122,14 +109,6 @@ namespace Roulette
         }
 
 
-
-        private static void EvenOrOdd(int num)
-        {
-            if (num % 2 == 1 && num != 37)
-            { Console.WriteLine("Even/Odd: ODD"); }
-            else
-            { Console.WriteLine("Even/Odd: Evan"); }
-        }
 
         public void Corner(int num)
         {

@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Roulette
 {
-    enum NumberSet { Even, Odd, Red, Black, First12, Second12, Third12, FirstHalf, SecondHalf}
+    public enum NumberSet { Even, Odd, Red, Black, First, Second, Third, High, Low }
 }

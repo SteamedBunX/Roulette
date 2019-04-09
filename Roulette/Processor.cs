@@ -53,5 +53,39 @@ namespace Roulette
             else
             { return NumberSet.Red; }
         }
+
+        public static NumberSet OddOrEven(int num)
+        {
+            if (num % 2 == 1 && num != 37)
+            { return NumberSet.Odd; }
+            else
+            { return NumberSet.Even; }
+        }
+
+        public static NumberSet LowHigh(int num)
+        {
+            if (num <= 18)
+            { return NumberSet.Low; }
+            else
+            { return NumberSet.High; }
+        }
+
+        public static NumberSet Dozen(int num)
+        {
+            if (num <= 12)
+            { return NumberSet.First; }
+            if (num <= 24)
+            { return NumberSet.Second; }
+            return NumberSet.Third;
+        }
+
+        public static NumberSet Column(int num)
+        {
+            if (num % 3 == 1)
+            { return NumberSet.First; }
+            if (num % 3 == 2)
+            { return NumberSet.Second; }
+            return NumberSet.Third;
+        }
     }
 }
