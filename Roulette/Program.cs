@@ -91,8 +91,7 @@ namespace Roulette
                 Processor.Column(num);
 
                 // Street
-                int street = (num - 1) / 3 + 1;
-                Console.WriteLine("Street: ROW " + street);
+                Processor.Street(num);
 
                 // 6 Number, since it's using multiple arraylists, move it to a seperate method
                 Six_Numbers(num);
@@ -112,10 +111,10 @@ namespace Roulette
 
         public void Corner(int num)
         {
-            ArrayList group1 = new ArrayList();
-            ArrayList group2 = new ArrayList();
-            ArrayList group3 = new ArrayList();
-            ArrayList group4 = new ArrayList();
+            List<int> group1 = new List<int>();
+            List<int> group2 = new List<int>();
+            List<int> group3 = new List<int>();
+            List<int> group4 = new List<int>();
             Console.Write("Corner: ");
             if (!(num % 3 == 1) && !(num <= 3)) // Excluding first row and first column
             {
@@ -123,7 +122,6 @@ namespace Roulette
                 group1.Add(num - 3);
                 group1.Add(num - 1);
                 group1.Add(num);
-                Console.Write(Print_ArrayList(group1));
             }
             if (!(num % 3 == 0) && !(num <= 3)) // Excluding first row and third column
             {
@@ -131,7 +129,6 @@ namespace Roulette
                 group2.Add(num - 2);
                 group2.Add(num);
                 group2.Add(num + 1);
-                Console.Write(Print_ArrayList(group2));
             }
             if (!(num % 3 == 1) && !(num >= 34)) // Excluding last row and first column
             {
@@ -139,7 +136,6 @@ namespace Roulette
                 group3.Add(num);
                 group3.Add(num + 2);
                 group3.Add(num + 3);
-                Console.Write(Print_ArrayList(group3));
             }
             if (!(num % 3 == 0) && !(num >= 34)) // Excluding last row and third column
             {
@@ -147,7 +143,6 @@ namespace Roulette
                 group4.Add(num + 1);
                 group4.Add(num + 3);
                 group4.Add(num + 4);
-                Console.Write(Print_ArrayList(group4));
             }
             Console.WriteLine();
 
@@ -155,56 +150,49 @@ namespace Roulette
 
         public void Split(int num)
         {
-            ArrayList groupUP = new ArrayList();
-            ArrayList groupLEFT = new ArrayList();
-            ArrayList groupRIGHT = new ArrayList();
-            ArrayList groupDOWN = new ArrayList();
+            List<int> groupUP = new List<int>();
+            List<int> groupLEFT = new List<int>();
+            List<int> groupRIGHT = new List<int>();
+            List<int> groupDOWN = new List<int>();
             Console.Write("Split: ");
             if (!(num <= 3)) // Excluding first row
             {
                 groupUP.Add(num - 3);
                 groupUP.Add(num);
-                Console.Write(Print_ArrayList(groupUP));
             }
             if (!(num % 3 == 1)) // Excluding first column
             {
                 groupLEFT.Add(num - 1);
                 groupLEFT.Add(num);
-                Console.Write(Print_ArrayList(groupLEFT));
             }
             if (!(num % 3 == 0)) // Excluding third column
             {
                 groupRIGHT.Add(num);
                 groupRIGHT.Add(num + 1);
-                Console.Write(Print_ArrayList(groupRIGHT));
             }
             if (!(num >= 34)) // Excluding last row
             {
                 groupDOWN.Add(num);
                 groupDOWN.Add(num + 3);
-                Console.Write(Print_ArrayList(groupDOWN));
             }
-            Console.WriteLine();
         }
 
         public void Six_Numbers(int num)
         {
-            ArrayList group1 = new ArrayList();
-            ArrayList group2 = new ArrayList();
+            List<int> group1 = new List<int>();
+            List<int> group2 = new List<int>();
             Console.Write("Double Row: ");
             if (num >= 4)
             {
                 int begin = (num + 2) / 3 * 3 - 5;
                 for (int i = 0; i <= 5; i++)
                 { group1.Add(begin + i); }
-                Console.Write(Print_ArrayList(group1));
             }
             if (num <= 33)
             {
                 int begin = (num + 2) / 3 * 3 - 2;
                 for (int i = 0; i <= 5; i++)
                 { group2.Add(begin + i); }
-                Console.Write(Print_ArrayList(group2));
             }
 
             Console.WriteLine();
@@ -222,8 +210,8 @@ namespace Roulette
         {
             Console.WriteLine("Welcome to the game of Roulette!");
             Console.WriteLine("For this table: ");
-            Console.WriteLine("The black numbers are:" + Print_ArrayList(black));
-            Console.WriteLine("The red numbers are:" + Print_ArrayList(red));
+            Console.WriteLine("The black numbers are:" + black.ToStringExtended());
+            Console.WriteLine("The red numbers are:" + red.ToStringExtended());
         }
 
 

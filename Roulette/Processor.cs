@@ -87,5 +87,11 @@ namespace Roulette
             { return NumberSet.Second; }
             return NumberSet.Third;
         }
+
+        public static int Street(int num)
+        {
+            int street = (num - 1) / 3 + 1;
+            return street;
+        }
     }
 }
