@@ -7,26 +7,46 @@ using System.Threading.Tasks;
 
 namespace Roulette
 {
-    class Program
+    public static class ListExtention
     {
-        ArrayList black = new ArrayList();
-        ArrayList red = new ArrayList();
+
+        public static string ToStringExtended<T>(this List<T> list)
+        {
+            return $"[ {string.Join(", ", list)} ]";
+        }
+
+    }
+
+    public class Program
+    {
+        List<int> black;
+        List<int> red;
+        Random r;
         static void Main(string[] args)
         {
             Program program = new Program();
-            program.Initiate_Color();
-            program.Welcome();
+            program.Run();
+        }
+
+        public Program()
+        {
+            r = new Random();
+        }
+
+        public void Run()
+        {
+            Processor.Color_Ini(out red, out black, ref r);
+            Welcome();
             bool continues = true;
             Console.Write("Press enter to start.");
             Console.ReadLine();
-            Random r = new Random();
             bool skip = false;
             while (continues)
             {
-                if(!skip)
-                { 
+                if (!skip)
+                {
                     int resnum = r.Next(38); // 37 is for 00
-                    program.print_result(resnum);
+                    Print_result(resnum);
                 }
                 skip = false;
                 Console.WriteLine("If you would like to continue the next round, please press Enter.");
@@ -39,60 +59,49 @@ namespace Roulette
                 }
                 if (c == "R" || c == "r")
                 {
-                    program.Initiate_Color();
-                    Console.WriteLine("The black numbers are:" + program.Print_ArrayList(program.black));
-                    Console.WriteLine("The red numbers are:" + program.Print_ArrayList(program.red));
+                    Processor.Color_Ini(out red, out black, ref r);
+                    Console.WriteLine("The black numbers are:" + black.ToStringExtended());
+                    Console.WriteLine("The red numbers are:" + red.ToStringExtended());
                     skip = true;
                 }
             }
         }
 
-
-
-        public void print_result(int num)
+        public void Print_result(int num)
         {
             //Special case for 00
-            if (num == 37) 
-            { Console.WriteLine("Number: 00");}
-            else
-            { Console.WriteLine("Number: " + num);}
+            Processor.NumberResult(num);
 
             // Odd/Even
-            if (num%2 == 1 && num!= 37) 
-            {Console.WriteLine("Even/Odd: ODD");}
-            else
-            {Console.WriteLine("Even/Odd: Evan");}
+            EvenOrOdd(num);
 
             // Excludes 0 and 00 for the results
-            if (num != 0 && num != 37) 
+            if (num != 0 && num != 37)
             {
                 // Red/Black
-                if (Is_black(num))
-                {Console.WriteLine("Red/Black: BLACK");}
-                else
-                {Console.WriteLine("Red/Black: RED");}
+                Processor.ColorResult(num, ref black);
 
                 // High/Low
-                if (num <= 18) 
-                {Console.WriteLine("High/Low: LOW");}
+                if (num <= 18)
+                { Console.WriteLine("High/Low: LOW"); }
                 else
-                {Console.WriteLine("High/Low: HIGH");}
+                { Console.WriteLine("High/Low: HIGH"); }
 
                 // Dozen
-                if (num <= 12) 
-                {Console.WriteLine("Dozen : 1ST DOZEN");}
-                else if(num <= 24)
-                {Console.WriteLine("Dozen : 2ND DOZEN");}
+                if (num <= 12)
+                { Console.WriteLine("Dozen : 1ST DOZEN"); }
+                else if (num <= 24)
+                { Console.WriteLine("Dozen : 2ND DOZEN"); }
                 else
-                { Console.WriteLine("Dozen : 3RD DOZEN");}
+                { Console.WriteLine("Dozen : 3RD DOZEN"); }
 
                 // Column
                 if (num % 3 == 1)
-                {Console.WriteLine("Column : 1ST COLUMN");}
-                else if(num % 3 == 2)
-                {Console.WriteLine("Column : 2ND COLUMN");}
+                { Console.WriteLine("Column : 1ST COLUMN"); }
+                else if (num % 3 == 2)
+                { Console.WriteLine("Column : 2ND COLUMN"); }
                 else
-                {Console.WriteLine("Column : 3RD COLUMN");}
+                { Console.WriteLine("Column : 3RD COLUMN"); }
 
                 // Street
                 int street = (num - 1) / 3 + 1;
@@ -110,6 +119,16 @@ namespace Roulette
             }
 
 
+        }
+
+
+
+        private static void EvenOrOdd(int num)
+        {
+            if (num % 2 == 1 && num != 37)
+            { Console.WriteLine("Even/Odd: ODD"); }
+            else
+            { Console.WriteLine("Even/Odd: Evan"); }
         }
 
         public void Corner(int num)
@@ -215,8 +234,8 @@ namespace Roulette
 
         public bool Is_black(int num)
         {
-            if(black.Contains(num))
-             return true;
+            if (black.Contains(num))
+                return true;
             return false;
         }
 
@@ -228,52 +247,7 @@ namespace Roulette
             Console.WriteLine("The red numbers are:" + Print_ArrayList(red));
         }
 
-        public void Initiate_Color()     // Initiate the black and red color ArrayList.
-        {
-            int i = 1;
-            black.Clear();
-            red.Clear();
-            Random r = new Random();
-            while(black.Count < 18)
-            {
-                if(i >= 36)
-                {
-                    i = 1;
-                }
-                if(!black.Contains(i))
-                {
-                    if(r.NextDouble() < 0.5)
-                    {
-                        black.Add(i);
-                    }
-                }
-                i++;
-            }
-            black.Sort();
-            for(int j = 1; j <= 36; j++)
-            {
-                if(!black.Contains(j))
-                {
-                    red.Add(j);
-                }
-            }
-        }
 
-        public String Print_ArrayList(ArrayList array_in)
-        {
-            String result = "[";
-
-            foreach (int num in array_in)
-            {
-                result += num;
-                if(num != (int)array_in[array_in.Count-1])
-                {
-                    result += ", ";
-                }
-            }
-            result += "]";
-                return result;
-        }
 
     }
 }
