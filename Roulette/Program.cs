@@ -31,11 +31,11 @@ namespace Roulette
         public Program()
         {
             r = new Random();
+            Processor.Color_Ini(out red, out black, ref r);
         }
 
         public void Run()
         {
-            Processor.Color_Ini(out red, out black, ref r);
             Welcome();
             bool continues = true;
             Console.Write("Press enter to start.");

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Roulette
 {
-    static class Processor
+    public static class Processor
     {
         public static void Color_Ini(out List<int> red, out List<int> black, ref Random r)
         {

@@ -17,7 +17,7 @@ namespace Roulette.Tests
         [TestInitialize]
         public void Ini()
         {
-            program.Initiate_Color();
+            
         }
 
         [TestMethod()]
