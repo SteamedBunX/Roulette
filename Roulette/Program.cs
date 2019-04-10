@@ -7,15 +7,7 @@ using System.Threading.Tasks;
 
 namespace Roulette
 {
-    public static class ListExtention
-    {
 
-        public static string ToStringExtended<T>(this List<T> list)
-        {
-            return $"[ {string.Join(", ", list)} ]";
-        }
-
-    }
 
     public class Program
     {
@@ -46,7 +38,7 @@ namespace Roulette
                 if (!skip)
                 {
                     int resnum = r.Next(38); // 37 is for 00
-                    Processor.GetResult(resnum, ref black);
+                    Processor.PrintResult(Processor.GetResult(resnum, ref black));
                 }
                 skip = false;
                 Console.WriteLine("If you would like to continue the next round, please press Enter.");

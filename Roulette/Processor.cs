@@ -6,8 +6,31 @@ using System.Threading.Tasks;
 
 namespace Roulette
 {
+
+    public static class ListExtention
+    {
+
+        public static string ToStringExtended<T>(this List<List<T>> list)
+        {
+
+            List<string> temps = new List<string>();
+            foreach (List<T> l in list)
+            {
+                temps.Add(l.ToStringExtended());
+            }
+            return $"[ {string.Join(", ", temps)} ]";
+        }
+
+        public static string ToStringExtended<T>(this List<T> list)
+        {
+            return $"[ {string.Join(", ", list)} ]";
+        }
+
+    }
+
     public static class Processor
     {
+
         public static Model GetResult(int num, ref List<int> black)
         {
             Model m;
@@ -17,7 +40,8 @@ namespace Roulette
                 m = new Model
                 {
                     Number = Processor.NumberResult(num),
-                    OddEven = Processor.OddOrEven(num)
+                    OddEven = Processor.OddOrEven(num),
+                    IsZeroSet = true
                 };
                 return m;
             }
@@ -25,6 +49,7 @@ namespace Roulette
             {
                 Number = Processor.NumberResult(num),
                 OddEven = Processor.OddOrEven(num),
+                IsZeroSet = false,
                 Color = Processor.Color(num, ref black),
                 LowHigh = Processor.LowHigh(num),
                 Dozen = Processor.Dozen(num),
@@ -219,7 +244,19 @@ namespace Roulette
 
         public static void PrintResult(Model result)
         {
-
+            Console.WriteLine($"Number: {result.Number}");
+            Console.WriteLine($"Even/Odd: {result.OddEven}");
+            if (!result.IsZeroSet)
+            {
+                Console.WriteLine($"Red/Black: {result.Color}");
+                Console.WriteLine($"High/Low: {result.LowHigh}");
+                Console.WriteLine($"Dozen : {result.Dozen} Dozen");
+                Console.WriteLine($"Column : {result.Column} Column");
+                Console.WriteLine($"Street: ROW {result.Street}");
+                Console.WriteLine($"Double Row: {result.Six_Numbers.ToStringExtended()}");
+                Console.WriteLine($"Split: {result.Split.ToStringExtended()}");
+                Console.WriteLine($"Corner: {result.Corner.ToStringExtended()}");
+            }
         }
     }
 }

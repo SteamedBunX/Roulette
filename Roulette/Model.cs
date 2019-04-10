@@ -10,6 +10,7 @@ namespace Roulette
     {
         public string Number { get; set; }
         public NumberSet Color { get; set; }
+        public bool IsZeroSet { get; set; }
         public NumberSet OddEven { get; set; }
         public NumberSet LowHigh { get; set; }
         public NumberSet Dozen { get; set; }
