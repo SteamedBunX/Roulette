@@ -32,19 +32,24 @@ namespace Roulette
             bool continues = true;
             Console.Write("Press enter to start.");
             Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine($"The black numbers are: {black.ToStringExtended()}");
+            Console.WriteLine($"The red numbers are: {red.ToStringExtended()}");
             bool skip = false;
             while (continues)
             {
                 if (!skip)
                 {
+
                     int resnum = r.Next(38); // 37 is for 00
                     Processor.PrintResult(Processor.GetResult(resnum, ref black));
                 }
                 skip = false;
-                Console.WriteLine("If you would like to continue the next round, please press Enter.");
+                Console.WriteLine("\nIf you would like to continue the next round, please press Enter.");
                 Console.WriteLine("If you would like to reset the color, please enter R and press Enter.");
                 Console.WriteLine("If you would like to exit, enter E and press Enter.");
                 String c = Console.ReadLine();
+                Console.Clear();
                 if (c == "E" || c == "e")
                 {
                     continues = false;
@@ -52,10 +57,10 @@ namespace Roulette
                 if (c == "R" || c == "r")
                 {
                     Processor.Color_Ini(out red, out black, ref r);
-                    Console.WriteLine("The black numbers are:" + black.ToStringExtended());
-                    Console.WriteLine("The red numbers are:" + red.ToStringExtended());
                     skip = true;
                 }
+                Console.WriteLine($"The black numbers are: {black.ToStringExtended()}");
+                Console.WriteLine($"The red numbers are: {red.ToStringExtended()}");
             }
         }
 

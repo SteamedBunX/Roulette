@@ -70,7 +70,7 @@ namespace Roulette
             red = new List<int>();
             while (black.Count < 18)
             {
-                if (i >= 36)
+                if (i > 36)
                 {
                     i = 1;
                 }
