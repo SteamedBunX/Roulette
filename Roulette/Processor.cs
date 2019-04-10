@@ -35,7 +35,7 @@ namespace Roulette
         {
             Model m;
             // Excludes 0 and 00 for the results
-            if (num == 0 && num == 37)
+            if (num == 0 || num == 37)
             {
                 m = new Model
                 {
