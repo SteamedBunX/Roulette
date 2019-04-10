@@ -8,6 +8,35 @@ namespace Roulette
 {
     public static class Processor
     {
+        public static Model GetResult(int num)
+        {
+            // Excludes 0 and 00 for the results
+            if (num == 0 && num == 37)
+            {
+                Model m = new Model
+                {
+                    Number = Processor.NumberResult(num),
+                    OddEven = Processor.OddOrEven(num)
+                };
+                return m;
+            }
+            Model m = new Model
+            {
+                Number = Processor.NumberResult(num),
+                OddEven = Processor.OddOrEven(num),
+                Color = Processor.Color(num, ref black),
+                LowHigh = Processor.LowHigh(num),
+                Dozen = Processor.Dozen(num),
+                Column = Processor.Column(num),
+                Street = Processor.Street(num),
+                Six_Numbers = Processor.Six_Numbers(num),
+                Split = Processor.Split(num),
+                Corner = Processor.Corner(num)
+            };
+            return m;
+
+        }
+
         public static void Color_Ini(out List<int> red, out List<int> black, ref Random r)
         {
             int i = 1;

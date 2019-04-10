@@ -46,7 +46,7 @@ namespace Roulette
                 if (!skip)
                 {
                     int resnum = r.Next(38); // 37 is for 00
-                    Print_result(resnum);
+                    Processor.GetResult(resnum);
                 }
                 skip = false;
                 Console.WriteLine("If you would like to continue the next round, please press Enter.");
@@ -67,28 +67,7 @@ namespace Roulette
             }
         }
 
-        public void Print_result(int num)
-        {
-
-            Model m = new Model();
-            m.Number = Processor.NumberResult(num);
-            m.OddEven = Processor.OddOrEven(num);
-
-            // Excludes 0 and 00 for the results
-            if (num != 0 && num != 37)
-            {
-                Processor.Color(num, ref black);
-                Processor.LowHigh(num);
-                Processor.Dozen(num);
-                Processor.Column(num);
-                Processor.Street(num);
-                Processor.Six_Numbers(num);
-                Processor.Split(num);
-                Processor.Corner(num);
-            }
-
-
-        }
+        
 
         public void Welcome() // Prints the welcome massage
         {
