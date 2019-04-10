@@ -8,19 +8,20 @@ namespace Roulette
 {
     public static class Processor
     {
-        public static Model GetResult(int num)
+        public static Model GetResult(int num, ref List<int> black)
         {
+            Model m;
             // Excludes 0 and 00 for the results
             if (num == 0 && num == 37)
             {
-                Model m = new Model
+                m = new Model
                 {
                     Number = Processor.NumberResult(num),
                     OddEven = Processor.OddOrEven(num)
                 };
                 return m;
             }
-            Model m = new Model
+            m = new Model
             {
                 Number = Processor.NumberResult(num),
                 OddEven = Processor.OddOrEven(num),
@@ -72,7 +73,7 @@ namespace Roulette
             if (num == 37)
             { return "00"; }
             else
-            { return $"{num:00}"; }
+            { return $"{num}"; }
         }
 
         public static NumberSet Color(int num, ref List<int> blacks)
@@ -214,6 +215,11 @@ namespace Roulette
             }
 
             return six_numbers;
+        }
+
+        public static void PrintResult(Model result)
+        {
+
         }
     }
 }

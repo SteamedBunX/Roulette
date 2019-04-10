@@ -46,7 +46,7 @@ namespace Roulette
                 if (!skip)
                 {
                     int resnum = r.Next(38); // 37 is for 00
-                    Processor.GetResult(resnum);
+                    Processor.GetResult(resnum, ref black);
                 }
                 skip = false;
                 Console.WriteLine("If you would like to continue the next round, please press Enter.");
@@ -66,8 +66,6 @@ namespace Roulette
                 }
             }
         }
-
-        
 
         public void Welcome() // Prints the welcome massage
         {
