@@ -46,7 +46,7 @@ namespace Roulette
             { return $"{num:00}"; }
         }
 
-        public static NumberSet ColorResult(int num, ref List<int> blacks)
+        public static NumberSet Color(int num, ref List<int> blacks)
         {
             if (blacks.Contains(num))
             { return NumberSet.Black; }
@@ -92,6 +92,99 @@ namespace Roulette
         {
             int street = (num - 1) / 3 + 1;
             return street;
+        }
+
+        public static List<List<int>> Corner(int num)
+        {
+            List<List<int>> corners = new List<List<int>>();
+            Console.Write("Corner: ");
+            if (!(num % 3 == 1) && !(num <= 3)) // Excluding first row and first column
+            {
+                corners.Add(new List<int>());
+                corners.Last().Add(num - 4);
+                corners.Last().Add(num - 3);
+                corners.Last().Add(num - 1);
+                corners.Last().Add(num);
+            }
+            if (!(num % 3 == 0) && !(num <= 3)) // Excluding first row and third column
+            {
+                corners.Add(new List<int>());
+                corners.Last().Add(num - 3);
+                corners.Last().Add(num - 2);
+                corners.Last().Add(num);
+                corners.Last().Add(num + 1);
+            }
+            if (!(num % 3 == 1) && !(num >= 34)) // Excluding last row and first column
+            {
+                corners.Add(new List<int>());
+                corners.Last().Add(num - 1);
+                corners.Last().Add(num);
+                corners.Last().Add(num + 2);
+                corners.Last().Add(num + 3);
+            }
+            if (!(num % 3 == 0) && !(num >= 34)) // Excluding last row and third column
+            {
+                corners.Add(new List<int>());
+                corners.Last().Add(num);
+                corners.Last().Add(num + 1);
+                corners.Last().Add(num + 3);
+                corners.Last().Add(num + 4);
+            }
+            return corners;
+
+        }
+
+        public static List<List<int>> Split(int num)
+        {
+            List<List<int>> split = new List<List<int>>();
+            Console.Write("Split: ");
+            if (!(num <= 3)) // Excluding first row
+            {
+                split.Add(new List<int>());
+                split.Last().Add(num - 3);
+                split.Last().Add(num);
+            }
+            if (!(num % 3 == 1)) // Excluding first column
+            {
+                split.Add(new List<int>());
+                split.Last().Add(num - 1);
+                split.Last().Add(num);
+            }
+            if (!(num % 3 == 0)) // Excluding third column
+            {
+                split.Add(new List<int>());
+                split.Last().Add(num);
+                split.Last().Add(num + 1);
+            }
+            if (!(num >= 34)) // Excluding last row
+            {
+                split.Add(new List<int>());
+                split.Last().Add(num);
+                split.Last().Add(num + 3);
+            }
+            return split;
+        }
+
+        public static List<List<int>> Six_Numbers(int num)
+        {
+            List<List<int>> six_numbers = new List<List<int>>();
+            Console.Write("Double Row: ");
+            if (num >= 4)
+            {
+                six_numbers.Add(new List<int>());
+                int begin = (num + 2) / 3 * 3 - 5;
+                for (int i = 0; i <= 5; i++)
+                { six_numbers.Last().Add(begin + i); }
+            }
+            if (num <= 33)
+            {
+                six_numbers.Add(new List<int>());
+                int begin = (num + 2) / 3 * 3 - 2;
+                for (int i = 0; i <= 5; i++)
+                { six_numbers.Last().Add(begin + i); }
+            }
+
+            return six_numbers;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Roulette
 {
     class Model
     {
-
+        public string Number { get; set; }
+        public NumberSet OddEven { get; set; }
     }
 }
