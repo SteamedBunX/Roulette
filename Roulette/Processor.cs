@@ -152,7 +152,6 @@ namespace Roulette
         public static List<List<int>> Corner(int num)
         {
             List<List<int>> corners = new List<List<int>>();
-            Console.Write("Corner: ");
             if (!(num % 3 == 1) && !(num <= 3)) // Excluding first row and first column
             {
                 corners.Add(new List<int>());
@@ -192,7 +191,6 @@ namespace Roulette
         public static List<List<int>> Split(int num)
         {
             List<List<int>> split = new List<List<int>>();
-            Console.Write("Split: ");
             if (!(num <= 3)) // Excluding first row
             {
                 split.Add(new List<int>());
@@ -223,7 +221,6 @@ namespace Roulette
         public static List<List<int>> Six_Numbers(int num)
         {
             List<List<int>> six_numbers = new List<List<int>>();
-            Console.Write("Double Row: ");
             if (num >= 4)
             {
                 six_numbers.Add(new List<int>());
